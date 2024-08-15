@@ -4,7 +4,6 @@ const User = require("../models/user"); // Adjust the path as needed
 require("dotenv").config();
 // Connect to MongoDB
 
-
 // Function to seed the principal user
 async function seedPrincipal() {
   try {
@@ -51,7 +50,11 @@ async function seedPrincipal() {
 // Export the database connection and seed function
 module.exports = {
   connect: async () => {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000, 
+    });
     console.log("Database connected");
 
     // Seed the principal user after connecting to the database
