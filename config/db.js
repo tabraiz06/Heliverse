@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user"); // Adjust the path as needed
-
+require("dotenv").config();
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/classroom");
+
 
 // Function to seed the principal user
 async function seedPrincipal() {
@@ -51,7 +51,7 @@ async function seedPrincipal() {
 // Export the database connection and seed function
 module.exports = {
   connect: async () => {
-    await mongoose.connect("mongodb://localhost:27017/classroom");
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("Database connected");
 
     // Seed the principal user after connecting to the database
